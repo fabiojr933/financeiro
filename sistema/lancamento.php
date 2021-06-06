@@ -36,7 +36,7 @@ require_once("../config/conexao.php");
 
                     <?php
 
-                    $query = $pdo->query("SELECT lan.id, cont.banco, de.nome as dre, flu.nome as fluxo, des.nome as despesa, lan.valor, lan.data
+                    $query = $pdo->query("SELECT lan.id, cont.banco, de.nome as dre, flu.nome as fluxo, des.nome as despesa, lan.valor, lan.data, des.tipo
                                                     FROM lancamento lan
                                                     join despesa des on des.id = lan.id_despesa
                                                     join conta cont on  cont.id = lan.id_conta
@@ -52,10 +52,20 @@ require_once("../config/conexao.php");
                         $despesa  = $res[$i]['despesa'];
                         $fluxo    = $res[$i]['fluxo'];
                         $valor    = $res[$i]['valor'];
-                        $data     = $res[$i]['data'];
-
-
+                        $data     =$res[$i]['data'];
+                        $tipo     = $res[$i]['tipo'];
+                         
+                        
+                       
+                       
+                        
                         $id = $res[$i]['id'];
+
+                        if($tipo == "Saida"){
+                            $cor = "text-danger";
+                        }else{
+                            $cor = "text-primary";
+                        }
 
 
                     ?>
@@ -65,8 +75,8 @@ require_once("../config/conexao.php");
                             <td><?php echo $banco ?></td>
                             <td><?php echo $despesa ?></td>
                             <td><?php echo $fluxo ?></td>
-                            <td><?php echo $valor ?></td>
-                            <td><?php echo $data ?></td>
+                            <td class="<?php echo $cor ?>">R$: <?php echo $valor ?></td>
+                            <td><?php echo date('d-m-Y', strtotime($data)) ?></td>
 
 
                             <td>
@@ -98,21 +108,21 @@ require_once("../config/conexao.php");
                 <?php
                 if (@$_GET['funcao'] == 'editar') {
                     $titulo = "Editar Registro";
-                    $id2 = $_GET['id'];
+                    $id2 = $_GET['id'];  
 
-                    $query = $pdo->query("SELECT lan.id, cont.banco, de.nome as dre, flu.nome as fluxo, des.nome as despesa, lan.valor, lan.data,
-                                            cont.id as id_banco,de.id as id_dre, fluxo.id as id_fluxo, des.id as id_despesa
+                    $query = $pdo->query("SELECT lan.id, cont.banco, de.nome as dre, fluxo.nome as fluxo, des.nome as despesa, lan.valor, lan.data,
+                                            cont.id as id_banco,de.id as id_dre, fluxo.id as id_fluxo, des.id as id_despesa, lan.observacao
                                         FROM lancamento lan
                                         join despesa des on des.id = lan.id_despesa
                                         join conta cont on  cont.id = lan.id_conta
                                         join dre de on de.id = lan.id_dre
-                                        join fluxo flu on flu.id = lan.id_fluxo where id = '" . $id2 . "' ");
+                                        join fluxo on fluxo.id = lan.id_fluxo where lan.id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     $id_banco   = $res[0]['id_banco'];
                     $id_dre     = $res[0]['id_dre'];
                     $id_fluxo   = $res[0]['id_fluxo'];
-                    $id_despesa = $res[0]['id_despesa'];
+                    $id_despesa = $res[0]['id_despesa']; 
 
 
                     $dre2     = $res[0]['dre'];
@@ -121,6 +131,7 @@ require_once("../config/conexao.php");
                     $despesa2 = $res[0]['despesa'];
                     $valor2   = $res[0]['valor'];
                     $data2    = $res[0]['data'];
+                    $observacao2    = $res[0]['observacao'];
                 } else {
                     $titulo = "Inserir Lançamento";
                 }
@@ -153,7 +164,7 @@ require_once("../config/conexao.php");
                                         $nome_dre2 = $res[$i]['nome'];
                                         $id_dre2 = $res[$i]['id'];
                                     ?>
-                                        <option <?php if (@$id_dre == $id_dre2) { ?> selected <?php } ?> value="<?php echo $id_dre2 ?>"><?php echo $nome_dre2 ?></option>
+                                        <option <?php if (@$id_dre == $id_dre2) { ?> selected <?php } ?> value="<?php echo @$id_dre2 ?>"><?php echo @$nome_dre2 ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -173,7 +184,7 @@ require_once("../config/conexao.php");
                                         $nome_banco2 = $res[$i]['banco'];
                                         $id_banco2 = $res[$i]['id'];
                                     ?>
-                                        <option <?php if (@$id_banco2 == $id_banco) { ?> selected <?php } ?> value="<?php echo $id_banco2 ?>"><?php echo $nome_banco2 ?></option>
+                                        <option <?php if (@$id_banco2 == $id_banco) { ?> selected <?php } ?> value="<?php echo @$id_banco2 ?>"><?php echo @$nome_banco2 ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -230,13 +241,19 @@ require_once("../config/conexao.php");
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Valor</label>
-                                <input value="<?php echo @$valor2 ?>" type="number" class="form-control" id="valor" name="valor" placeholder="Valor">
+                                <input value="<?php echo @$valor2 ?>" type="text" class="form-control" id="valor" name="valor" placeholder="Valor">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Data</label>
                                 <input value="<?php echo @$data2 ?>" type="date" class="form-control" id="data" name="data" placeholder="Data">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Observação</label>
+                                <input value="<?php echo @$observacao2 ?>" type="text" class="form-control" id="observacao" name="observacao" placeholder="observacao">
                             </div>
                         </div>
                     </div>

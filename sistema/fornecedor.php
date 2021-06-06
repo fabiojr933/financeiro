@@ -1,5 +1,5 @@
 <?php
-$pag = "Despesa";
+$pag = "fornecedor";
 require_once("../config/conexao.php");
 @session_start();
 
@@ -7,7 +7,7 @@ require_once("../config/conexao.php");
 ?>
 
 <div class="row mt-4 mb-4">
-    <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Nova Despesa</a>
+    <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo fornecedor</a>
     <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
 
 </div>
@@ -22,8 +22,7 @@ require_once("../config/conexao.php");
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th width="65%" align="left">Nome</th>
-                        <th width="35%" align="left">Tipo</th>
+                        <th width="90%" align="left">Nome</th>                       
 
                         <th>Ações</th>
                     </tr>
@@ -33,7 +32,7 @@ require_once("../config/conexao.php");
 
                     <?php
 
-                    $query = $pdo->query("SELECT * FROM despesa order by id desc ");
+                    $query = $pdo->query("SELECT * FROM fornecedor order by id desc ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     for ($i = 0; $i < count($res); $i++) {
@@ -41,9 +40,7 @@ require_once("../config/conexao.php");
                         }
 
                         $nome = $res[$i]['nome'];
-                        $tipo = $res[$i]['tipo'];
-
-
+                       
 
                         $id = $res[$i]['id'];
 
@@ -52,8 +49,7 @@ require_once("../config/conexao.php");
 
 
                         <tr>
-                            <td width="60%" align="left"><?php echo $nome ?></td>
-                            <td width="30%" align="left"><?php echo $tipo ?></td>
+                            <td><?php echo $nome ?></td>                           
 
 
                             <td>
@@ -87,7 +83,7 @@ require_once("../config/conexao.php");
                     $titulo = "Editar Registro";
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM despesa where id = '" . $id2 . "' ");
+                    $query = $pdo->query("SELECT * FROM fornecedor where id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     $nome2 = $res[0]['nome'];
@@ -108,19 +104,9 @@ require_once("../config/conexao.php");
 
                     <div class="form-group">
                         <label>Nome</label>
-                        <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome_despesa" name="nome_despesa" placeholder="Nome">
+                        <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome_fornecedor" name="nome_fornecedor" placeholder="Nome">
                     </div>
-                    <div class="form-group">
-                        <label>Tipo</label>
-                        <select name="tipo" class="form-control" id="tipo">
-                            <option selected>Selecione um tipo</option>
-                            <option value="Saida">Saida</option>
-                            <option value="Entrada">Entrada</option>                           
-                        </select>
-                    </div>
-
-
-
+                   
 
                     <small>
                         <div id="mensagem">

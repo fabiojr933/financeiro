@@ -10,7 +10,8 @@ $menu5 = "Contas a receber";
 $menu6 = "Contas a pagar";
 $menu7 = "Fluxo Financeiro";
 $menu8 = "Lancamento";
-
+$menu9 = "fornecedor";
+$menu10 = "conta_pagar";
 
 ?>
 
@@ -89,6 +90,7 @@ $menu8 = "Lancamento";
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Despesa</a>
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Dre</a>
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu4 ?>">Fluxo</a>
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu9 ?>">Fornecedor</a>
                     </div>
                 </div>
             </li>
@@ -102,8 +104,8 @@ $menu8 = "Lancamento";
                 <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu8 ?>">Lançamento</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Contas a receber</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu6 ?>">Contas a pagar</a>
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu01 ?>">Contas a receber</a>
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu10 ?>">Contas a pagar</a>
                     </div>
                 </div>
             </li>
@@ -226,6 +228,10 @@ $menu8 = "Lancamento";
                         @include_once(@$menu7 . ".php");
                     } else if (@$pag == $menu8) {
                         @include_once(@$menu8 . ".php");
+                    } else if (@$pag == $menu9) {
+                        @include_once(@$menu9 . ".php");
+                    } else if (@$pag == $menu10) {
+                        @include_once(@$menu10 . ".php");
                     } else {
                         @include_once("home.php");
                     }
