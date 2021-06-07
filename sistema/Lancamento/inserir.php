@@ -25,43 +25,45 @@ if ($valor == "") {
  *   SE FOR ENTRADA SOMA COM O SALDO DO CAIXA
  * 4 FAZ O LANÇAMENTO
  */
-$query_tipo = $pdo->query("SELECT * FROM DESPESA WHERE ID = $despesa");
-$resul_tipo = $query_tipo->fetchAll(PDO::FETCH_ASSOC);
-$tipo_atual = $resul_tipo[0]['tipo'];
+try {
+    $query_tipo = $pdo->query("SELECT * FROM DESPESA WHERE ID = $despesa");
+    $resul_tipo = $query_tipo->fetchAll(PDO::FETCH_ASSOC);
+    $tipo_atual = $resul_tipo[0]['tipo'];
 
 
-$query_saldo_caixa = $pdo->query("SELECT * FROM CONTA WHERE ID = '$banco' ");
-$resul_saldo = $query_saldo_caixa->fetchAll(PDO::FETCH_ASSOC);
-$saldo_atual = $resul_saldo[0]['saldo'];
+    $query_saldo_caixa = $pdo->query("SELECT * FROM CONTA WHERE ID = '$banco' ");
+    $resul_saldo = $query_saldo_caixa->fetchAll(PDO::FETCH_ASSOC);
+    $saldo_atual = $resul_saldo[0]['saldo'];
 
-if ($tipo_atual == "Saida") {
-    if ($valor > $saldo_atual) {
-        echo "Impossivel fazer o lançamento, O valor digitado é maior do que o valor do CAIXA";
-        exit;
+    if ($tipo_atual == "Saida") {
+        if ($valor > $saldo_atual) {
+            echo "Impossivel fazer o lançamento, O valor digitado é maior do que o valor do CAIXA";
+            exit;
+        }
+        $saida = $saldo_atual - $valor;
+        $query_atualizar_caixa = $pdo->query("UPDATE CONTA SET SALDO = $saida WHERE ID = '$banco' ");
+    } else {
+        $saida = $saldo_atual + $valor;
+        $query_atualizar_caixa = $pdo->query("UPDATE CONTA SET SALDO = $saida WHERE ID = '$banco' ");
     }
-    $saida = $saldo_atual - $valor;
-    $query_atualizar_caixa = $pdo->query("UPDATE CONTA SET SALDO = $saida WHERE ID = '$banco' ");
-} else {
-    $saida = $saldo_atual + $valor;
-    $query_atualizar_caixa = $pdo->query("UPDATE CONTA SET SALDO = $saida WHERE ID = '$banco' ");
-}
 
-if ($id == "") {
-    $query = $pdo->prepare("INSERT INTO LANCAMENTO (ID_CONTA, ID_DESPESA, ID_DRE, ID_FLUXO, VALOR, DATA, OBSERVACAO)
+    if ($id == "") {
+        $query = $pdo->prepare("INSERT INTO LANCAMENTO (ID_CONTA, ID_DESPESA, ID_DRE, ID_FLUXO, VALOR, DATA, OBSERVACAO)
                         VALUES(:ID_CONTA, :ID_DESPESA, :ID_DRE, :ID_FLUXO, :VALOR, :data_d, :OBSERVACAO)");
-} else {
-    $query = $pdo->prepare("UPDATE LANCAMENTO SET ID_CONTA = :ID_CONTA, ID_DESPESA = :ID_DESPESA, ID_DRE = :ID_DRE, 
+    } else {
+        $query = $pdo->prepare("UPDATE LANCAMENTO SET ID_CONTA = :ID_CONTA, ID_DESPESA = :ID_DESPESA, ID_DRE = :ID_DRE, 
                             ID_FLUXO = :ID_FLUXO, VALOR = :VALOR, DATA = :data_d, OBSERVACAO = :OBSERVACAO WHERE ID = :ID");
-    $query->bindValue(":ID", $id);
+        $query->bindValue(":ID", $id);
+    }
+    $query->bindValue(":ID_CONTA", $banco);
+    $query->bindValue(":ID_DESPESA", $despesa);
+    $query->bindValue(":ID_DRE", $dre);
+    $query->bindValue(":ID_FLUXO", $fluxo);
+    $query->bindValue(":VALOR", $valor);
+    $query->bindValue(":data_d", $data_d);
+    $query->bindValue(":OBSERVACAO", $observacao);
+    $query->execute();
+    echo "Salvo com Sucesso!!";
+} catch (\Throwable $th) {
+    echo "Ops ocorreu algum erro " . $th->getMessage();
 }
-$query->bindValue(":ID_CONTA", $banco);
-$query->bindValue(":ID_DESPESA", $despesa);
-$query->bindValue(":ID_DRE", $dre);
-$query->bindValue(":ID_FLUXO", $fluxo);
-$query->bindValue(":VALOR", $valor);
-$query->bindValue(":data_d", $data_d);
-$query->bindValue(":OBSERVACAO", $observacao);
-$query->execute();
-
-
-echo "Salvo com Sucesso!!";

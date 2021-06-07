@@ -6,7 +6,8 @@ require_once("../../config/conexao.php");
  */
 $id = $_POST["id"];
 
-//PEGAR O VALOR E O ID_CONTA 
+try {
+    //PEGAR O VALOR E O ID_CONTA 
 $query_lanc = $pdo->query("SELECT * FROM LANCAMENTO WHERE ID = '$id' ");
 $resul_lan = $query_lanc->fetchAll(PDO::FETCH_ASSOC);
 $id_conta = $resul_lan[0]['id_conta'];
@@ -26,3 +27,6 @@ $query = $pdo->prepare("DELETE FROM LANCAMENTO WHERE ID = :ID");
 $query->bindValue(":ID", $id);
 $query->execute();
 echo "Excluído com Sucesso!!";
+} catch (\Throwable $th) {
+    echo "Ops ocorreu algum erro " . $th->getMessage();
+}

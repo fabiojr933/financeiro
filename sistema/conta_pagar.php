@@ -219,6 +219,48 @@ require_once("../config/conexao.php");
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Fluxo</label>
+                                <select name="fluxo" class="form-control" id="fluxo">
+                                    <?php
+
+                                    $query = $pdo->query("SELECT * FROM fluxo ");
+                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                    for ($i = 0; $i < @count($res); $i++) {
+                                        foreach ($res[$i] as $key => $value) {
+                                        }
+                                        $nome_fluxo2 = $res[$i]['nome'];
+                                        $id_fluxo2 = $res[$i]['id'];
+                                    ?>
+                                        <option <?php if (@$id_fluxo == $id_fluxo2) { ?> selected <?php } ?> value="<?php echo $id_fluxo2 ?>"><?php echo $nome_fluxo2 ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Despesa</label>
+                                <select name="despesa" class="form-control" id="despesa">
+                                    <?php
+
+                                    $query = $pdo->query("SELECT * FROM despesa ");
+                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                    for ($i = 0; $i < @count($res); $i++) {
+                                        foreach ($res[$i] as $key => $value) {
+                                        }
+                                        $nome_despesa2 = $res[$i]['nome'];
+                                        $id_despesa2 = $res[$i]['id'];
+                                    ?>
+                                        <option <?php if (@$id_despesa == $id_despesa2) { ?> selected <?php } ?> value="<?php echo $id_despesa2 ?>"><?php echo $nome_despesa2 ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label>Observação</label>

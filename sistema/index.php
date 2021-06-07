@@ -6,7 +6,7 @@ $menu1 = "Conta";
 $menu2 = "Despesa";
 $menu3 = "Dre";
 $menu4 = "Fluxo";
-$menu5 = "Contas a receber";
+$menu5 = "liquidacao_pagar";
 $menu6 = "Contas a pagar";
 $menu7 = "Fluxo Financeiro";
 $menu8 = "Lancamento";
@@ -99,13 +99,13 @@ $menu10 = "conta_pagar";
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true" aria-controls="collapseUtilities2">
                     <i class="fas fa-home"></i>
-                    <span>Financeiro</span>
+                    <span>Contas a pagar</span>
                 </a>
                 <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu8 ?>">Lançamento</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu01 ?>">Contas a receber</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu10 ?>">Contas a pagar</a>
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu10 ?>">Contas a pagar</a>                        
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Liquidação</a>
                     </div>
                 </div>
             </li>
