@@ -19,7 +19,7 @@ $saldo_atual = $resul_sum[0]['SALDO'];
 
 $saldo = $saldo_atual + $valor;
 
-$query_volta = $pdo->query("UPDATE CONTA SET SALDO = '$saldo' " );
+$query_volta = $pdo->query("UPDATE CONTA SET SALDO = '$saldo' WHERE ID = '$id_conta'" );
 
 //DELETA O LANÇAMENTO
 $query = $pdo->prepare("DELETE FROM LANCAMENTO WHERE ID = :ID");
