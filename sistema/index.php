@@ -12,6 +12,7 @@ $menu7 = "Fluxo Financeiro";
 $menu8 = "Lancamento";
 $menu9 = "fornecedor";
 $menu10 = "conta_pagar";
+$menu11 = "grafico";
 
 ?>
 
@@ -122,7 +123,7 @@ $menu10 = "conta_pagar";
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu7 ?>">Fluxo Financeiro</a>
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu11 ?>">Fluxo Financeiro</a>
                     </div>
                 </div>
             </li>
@@ -232,6 +233,9 @@ $menu10 = "conta_pagar";
                         @include_once(@$menu9 . ".php");
                     } else if (@$pag == $menu10) {
                         @include_once(@$menu10 . ".php");
+                    }
+                    else if (@$pag == $menu11) {
+                        @include_once(@$menu11 . ".php");
                     } else {
                         @include_once("home.php");
                     }

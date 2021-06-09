@@ -51,6 +51,8 @@ if ($pago == "S") {
     $valor_Pen = 0;
 }
 try {
+
+
     if (empty($id)) {
         $query = $pdo->prepare("INSERT INTO CONTA_PAGAR(ID_FORNECEDOR, DOCUMENTO, VALOR, VALOR_PENDENTE, JUROS_MULTA,
                  DATA_LANCAMENTO, DATA_VENCIMENTO, DATA_BAIXA, PAGO, ID_LANCAMENTO, OBSERVACAO)
@@ -79,7 +81,7 @@ try {
     
     //PEGA O ULTINO ID
     $id = $pdo->lastInsertId();
-
+  
     //INSERINDO OS DADOS NA TABELA CONTA_PAGAR_FLUXO
     $query2 = $pdo->prepare("INSERT INTO CONTA_PAGAR_FLUXO (ID_CONTA_PAGAR, ID_FLUXO, ID_DESPESA, TOTAL) VALUES(:ID_CONTA_PAGAR, :ID_FLUXO, :ID_DESPESA, :TOTAL)");
     $query2->bindValue(":ID_CONTA_PAGAR", $id);

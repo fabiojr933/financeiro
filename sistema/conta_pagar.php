@@ -142,6 +142,7 @@ require_once("../config/conexao.php");
                     $data_lancamento2  = $res[0]['data_lancamento'];
                     $data_vencimento2  = $res[0]['data_vencimento'];
                     $observacao2       = $res[0]['observacao'];
+                    $pago2             = $res[0]['pago'];
                 } else {
                     $titulo = "Inserir Registro";
                 }
@@ -261,7 +262,7 @@ require_once("../config/conexao.php");
                             </div>
                         </div>
                     </div>
-
+                   
                     <div class="form-group">
                         <label>Observação</label>
                         <input value="<?php echo @$observacao2 ?>" type="text" class="form-control" id="observacao" name="observacao" placeholder="Observacao">
@@ -529,3 +530,13 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "conta_pagar") {
 
     });
 </script>
+
+
+<script type="text/javascript">
+  var pago = "<?=$pago?>";
+   $(document).ready(function() {
+  	if(pago === "N"){              console.log('N');
+      document.getElementById('despesa_lanc').style.display = "none"; 
+  	}
+})
+
