@@ -13,6 +13,7 @@ $menu8 = "Lancamento";
 $menu9 = "fornecedor";
 $menu10 = "conta_pagar";
 $menu11 = "grafico";
+$menu12 = "relatorio";
 
 ?>
 
@@ -30,6 +31,7 @@ $menu11 = "grafico";
     <meta name="author" content="Hugo Vasconcelos">
 
     <title>Painel Administrativo</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -119,11 +121,28 @@ $menu11 = "grafico";
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-home"></i>
-                    <span>Fluxo</span>
+                    <span>Relatorio</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu11 ?>">Fluxo Financeiro</a>
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu12 ?>">Fluxo Financeiro</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities3" aria-expanded="true" aria-controls="collapseUtilities3">
+                    <i class="fas fa-home"></i>
+                    <span>Graficos</span>
+                </a>
+                <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu11 ?>">Graficos</a>
                     </div>
                 </div>
             </li>
@@ -236,6 +255,9 @@ $menu11 = "grafico";
                     }
                     else if (@$pag == $menu11) {
                         @include_once(@$menu11 . ".php");
+                    }
+                    else if (@$pag == $menu12) {
+                        @include_once(@$menu12 . ".php");
                     } else {
                         @include_once("home.php");
                     }
@@ -350,12 +372,9 @@ $menu11 = "grafico";
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
+             
 
-    <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+
 
     <!-- Page level plugins -->
     <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
