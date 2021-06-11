@@ -18,7 +18,7 @@ $query_sum = $pdo->query("SELECT SUM(SALDO) as SALDO FROM CONTA WHERE ID = '$id_
 $resul_sum = $query_sum->fetchAll(PDO::FETCH_ASSOC);
 $saldo_atual = $resul_sum[0]['SALDO'];
 
-$saldo = $saldo_atual + $valor;
+$saldo = $saldo_atual - $valor;
 
 $query_volta = $pdo->query("UPDATE CONTA SET SALDO = '$saldo' WHERE ID = '$id_conta'" );
 

@@ -4,20 +4,19 @@ require_once("../../config/conexao.php");
 $banco    = ucwords($_POST["nome_banco"]);
 $agencia  = str_replace(".", ",", $_POST["agencia_banco"]);
 $conta    = $_POST["conta_banco"];
-$saldo    = str_replace(".", ",", $_POST["saldo_banco"]);
+$saldo    = str_replace(",", ".", $_POST["saldo_banco"]);
 
-$id       = $_POST["txtid2"];
-$antigo   = $_POST["antigo"];
+$id       = $_POST["txtid2"]; 
 
 try {
-    if ($conta != $antigo) {
+   /* if ($conta != $antigo) {
         $query = $pdo->query("SELECT * FROM CONTA WHERE conta = '$conta'");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         if ($result) {
             echo "Ja existe Agencia cadastrado com essa conta {$conta}";
             exit;
-        }
-    }
+        } 
+    }  */
 
     if ($id == "") {
         $query = $pdo->prepare("INSERT INTO CONTA (BANCO, AGENCIA, CONTA, SALDO) VALUES(:BANCO, :AGENCIA, :CONTA, :SALDO)");

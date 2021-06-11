@@ -7,13 +7,15 @@ $menu2 = "Despesa";
 $menu3 = "Dre";
 $menu4 = "Fluxo";
 $menu5 = "liquidacao_pagar";
-$menu6 = "Contas a pagar";
+$menu6 = "contas_receber";
 $menu7 = "Fluxo Financeiro";
 $menu8 = "Lancamento";
 $menu9 = "fornecedor";
 $menu10 = "conta_pagar";
-$menu11 = "grafico";
+$menu11 = "grafico_geral";
 $menu12 = "relatorio";
+$menu13 = "liquidacao_receber";
+$menu14 = "grafico_data";
 
 ?>
 
@@ -107,8 +109,25 @@ $menu12 = "relatorio";
                 <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu8 ?>">Lançamento</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu10 ?>">Contas a pagar</a>                        
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu10 ?>">Contas a pagar</a>
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Liquidação</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities4" aria-expanded="true" aria-controls="collapseUtilities4">
+                    <i class="fas fa-home"></i>
+                    <span>Contas a receber</span>
+                </a>
+                <div id="collapseUtilities4" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu6 ?>">Contas a receber</a>
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu13 ?>">Liquidação</a>
                     </div>
                 </div>
             </li>
@@ -142,7 +161,8 @@ $menu12 = "relatorio";
                 </a>
                 <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu11 ?>">Graficos</a>
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu11 ?>">Graficos Geral</a>
+                        <a class="collapse-item" href="index.php?pag=<?php echo $menu14 ?>">Graficos Por Data</a>
                     </div>
                 </div>
             </li>
@@ -252,12 +272,14 @@ $menu12 = "relatorio";
                         @include_once(@$menu9 . ".php");
                     } else if (@$pag == $menu10) {
                         @include_once(@$menu10 . ".php");
-                    }
-                    else if (@$pag == $menu11) {
+                    } else if (@$pag == $menu11) {
                         @include_once(@$menu11 . ".php");
-                    }
-                    else if (@$pag == $menu12) {
+                    } else if (@$pag == $menu12) {
                         @include_once(@$menu12 . ".php");
+                    } else if (@$pag == $menu13) {
+                        @include_once(@$menu13 . ".php");
+                    } else if (@$pag == $menu14) {
+                        @include_once(@$menu14 . ".php");
                     } else {
                         @include_once("home.php");
                     }
@@ -372,7 +394,7 @@ $menu12 = "relatorio";
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
 
-             
+
 
 
 

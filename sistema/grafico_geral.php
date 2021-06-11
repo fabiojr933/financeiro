@@ -1,5 +1,5 @@
 <?php
-$pag = "grafico";
+$pag = "grafico_geral";
 require_once("../config/conexao.php");
 @session_start();
 
@@ -44,14 +44,9 @@ require_once("../config/conexao.php");
             ['Despesas', 'Valor'],
             <?php
 
-            $query = $pdo->query("select a.nome as despesas, 
-                  EXTRACT(MONTH FROM c.data_baixa) as mes,
-                  sum(b.total) as valor
-                  from despesa A
-                  join conta_pagar_fluxo b on a.id = b.id_despesa
-                  join conta_pagar c on b.id_conta_pagar = c.id
-                  GROUP by 1
-                  ORDER by mes");
+            $query = $pdo->query("select a.valor, b.nome as despesas
+            from lancamento a
+            join despesa b on a.id_despesa = b.id");
             $res = $query->fetchAll(PDO::FETCH_ASSOC);
             for ($i = 0; $i < count($res); $i++) {
                 foreach ($res[$i] as $key => $value) {
@@ -59,7 +54,7 @@ require_once("../config/conexao.php");
 
                 $desp = $res[$i]['despesas'];
                 $valor = $res[$i]['valor'];
-                $mes = $res[$i]['mes'];
+              
 
             ?>[' <?php echo $desp ?>', <?php echo $valor ?>],
             <?php } ?>
@@ -87,14 +82,9 @@ require_once("../config/conexao.php");
             ['Despesas', 'Valor'],
             <?php
 
-            $query = $pdo->query("select a.nome as despesas, 
-                  EXTRACT(MONTH FROM c.data_baixa) as mes,
-                  sum(b.total) as valor
-                  from despesa A
-                  join conta_pagar_fluxo b on a.id = b.id_despesa
-                  join conta_pagar c on b.id_conta_pagar = c.id
-                  GROUP by 1
-                  ORDER by mes");
+            $query = $pdo->query("select a.valor, b.nome as despesas
+            from lancamento a
+            join despesa b on a.id_despesa = b.id");
             $res = $query->fetchAll(PDO::FETCH_ASSOC);
             for ($i = 0; $i < count($res); $i++) {
                 foreach ($res[$i] as $key => $value) {
@@ -102,7 +92,7 @@ require_once("../config/conexao.php");
 
                 $desp = $res[$i]['despesas'];
                 $valor = $res[$i]['valor'];
-                $mes = $res[$i]['mes'];
+               
 
             ?>[' <?php echo $desp ?>', <?php echo $valor ?>],
             <?php } ?>
@@ -137,14 +127,9 @@ require_once("../config/conexao.php");
             ['Despesas', 'Valor'],
             <?php
 
-            $query = $pdo->query("select a.nome as despesas, 
-                  EXTRACT(MONTH FROM c.data_baixa) as mes,
-                  sum(b.total) as valor
-                  from despesa A
-                  join conta_pagar_fluxo b on a.id = b.id_despesa
-                  join conta_pagar c on b.id_conta_pagar = c.id
-                  GROUP by 1
-                  ORDER by mes");
+            $query = $pdo->query("select a.valor, b.nome as despesas
+            from lancamento a
+            join despesa b on a.id_despesa = b.id");
             $res = $query->fetchAll(PDO::FETCH_ASSOC);
             for ($i = 0; $i < count($res); $i++) {
                 foreach ($res[$i] as $key => $value) {
@@ -152,7 +137,7 @@ require_once("../config/conexao.php");
 
                 $desp = $res[$i]['despesas'];
                 $valor = $res[$i]['valor'];
-                $mes = $res[$i]['mes'];
+               
 
             ?>[' <?php echo $desp ?>', <?php echo $valor ?>],
             <?php } ?>
@@ -160,7 +145,7 @@ require_once("../config/conexao.php");
 
 
         var options = {
-            title: 'Monthly Coffee Production by Country',
+            title: 'Grafico de despesas',
             vAxis: {
                 title: 'Cups'
             },

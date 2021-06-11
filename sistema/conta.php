@@ -59,7 +59,7 @@ require_once("../config/conexao.php");
                         <td><?php echo $banco ?></td>
                         <td><?php echo $agencia ?></td>
                         <td><?php echo $conta ?></td>
-                        <td><?php echo $saldo ?></td>
+                        <td> <?php echo 'R$ ' . $saldo ?></td>
                        
 
                         <td>
