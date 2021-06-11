@@ -17,6 +17,9 @@ if ($valor == "") {
     exit;
 }
 /**
+ * 
+ */
+/**
  * 1 PEGAR O SALDO CO CAIXA
  * 2 VEREFICA SE É TIPO SAIDA
  * 3 VEREFICA sE O VALOR DIGITADO É MAIOR DO QUE O VALOR EM CAIXA
